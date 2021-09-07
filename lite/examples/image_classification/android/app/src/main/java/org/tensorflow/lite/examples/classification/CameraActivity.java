@@ -67,6 +67,8 @@ public abstract class CameraActivity extends AppCompatActivity
         Camera.PreviewCallback,
         View.OnClickListener,
         AdapterView.OnItemSelectedListener {
+  private static final String HOT_DOG_TITLE = "hotdog";
+
   private static final Logger LOGGER = new Logger();
 
   private static final int PERMISSIONS_REQUEST = 1;
@@ -538,7 +540,7 @@ public abstract class CameraActivity extends AppCompatActivity
       if (recognition != null) {
         if (recognition.getTitle() != null) {
           recognitionTextView.setText(recognition.getTitle());
-          if (recognition.getTitle().toLowerCase(Locale.getDefault()).equals("hotdog")) {
+          if (recognition.getTitle().toLowerCase(Locale.getDefault()).equals(HOT_DOG_TITLE)) {
             isHotDog = true;
           }
         }
@@ -551,7 +553,7 @@ public abstract class CameraActivity extends AppCompatActivity
       if (recognition1 != null) {
         if (recognition1.getTitle() != null) {
           recognition1TextView.setText(recognition1.getTitle());
-          if (recognition1.getTitle().toLowerCase(Locale.getDefault()).equals("hotdog")) {
+          if (recognition1.getTitle().toLowerCase(Locale.getDefault()).equals(HOT_DOG_TITLE)) {
             isHotDog = true;
           }
         }
@@ -564,7 +566,7 @@ public abstract class CameraActivity extends AppCompatActivity
       if (recognition2 != null) {
         if (recognition2.getTitle() != null) {
           recognition2TextView.setText(recognition2.getTitle());
-          if (recognition2.getTitle().toLowerCase(Locale.getDefault()).equals("hotdog")) {
+          if (recognition2.getTitle().toLowerCase(Locale.getDefault()).equals(HOT_DOG_TITLE)) {
             isHotDog = true;
           }
         }
