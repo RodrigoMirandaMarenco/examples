@@ -95,8 +95,8 @@ public abstract class CameraActivity extends AppCompatActivity
       recognitionValueTextView,
       recognition1ValueTextView,
       recognition2ValueTextView,
-      isHotDogTextView,
-      notHotDogTextView;
+      isPupusasTextView,
+      notPupusasTextView;
   protected TextView frameValueTextView,
       cropValueTextView,
       cameraResolutionTextView,
@@ -189,8 +189,8 @@ public abstract class CameraActivity extends AppCompatActivity
     recognition1ValueTextView = findViewById(R.id.detected_item1_value);
     recognition2TextView = findViewById(R.id.detected_item2);
     recognition2ValueTextView = findViewById(R.id.detected_item2_value);
-    isHotDogTextView = findViewById(R.id.tv_is_a_hot_dog);
-    notHotDogTextView = findViewById(R.id.tv_not_a_hot_dog);
+    isPupusasTextView = findViewById(R.id.tv_is_a_hot_dog);
+    notPupusasTextView = findViewById(R.id.tv_not_a_hot_dog);
 
     frameValueTextView = findViewById(R.id.frame_info);
     cropValueTextView = findViewById(R.id.crop_info);
@@ -564,11 +564,11 @@ public abstract class CameraActivity extends AppCompatActivity
       }
 
       if (isPupusas) {
-        isHotDogTextView.setVisibility(View.VISIBLE);
-        notHotDogTextView.setVisibility(View.GONE);
+        isPupusasTextView.setVisibility(View.VISIBLE);
+        notPupusasTextView.setVisibility(View.GONE);
       } else {
-        isHotDogTextView.setVisibility(View.GONE);
-        notHotDogTextView.setVisibility(View.VISIBLE);
+        isPupusasTextView.setVisibility(View.GONE);
+        notPupusasTextView.setVisibility(View.VISIBLE);
       }
     }
   }
