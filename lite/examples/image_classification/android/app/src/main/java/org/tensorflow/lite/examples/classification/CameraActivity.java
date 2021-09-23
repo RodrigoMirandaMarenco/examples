@@ -68,7 +68,7 @@ public abstract class CameraActivity extends AppCompatActivity
         View.OnClickListener,
         AdapterView.OnItemSelectedListener {
   private static final String PUPUSAS_TITLE = "pupusas";
-  private static final double PUPUSAS_THREASHOLD = 0.75;
+  private static final double PUPUSAS_THRESHOLD = 0.75;
 
   private static final Logger LOGGER = new Logger();
 
@@ -541,7 +541,7 @@ public abstract class CameraActivity extends AppCompatActivity
       if (recognition != null) {
         if (recognition.getTitle() != null) {
           recognitionTextView.setText(recognition.getTitle());
-          if (recognition.getTitle().toLowerCase(Locale.getDefault()).equals(PUPUSAS_TITLE) && recognition.getConfidence() >= PUPUSAS_THREASHOLD) {
+          if (recognition.getTitle().toLowerCase(Locale.getDefault()).equals(PUPUSAS_TITLE) && recognition.getConfidence() >= PUPUSAS_THRESHOLD) {
             isPupusas = true;
           }
         }
@@ -554,7 +554,7 @@ public abstract class CameraActivity extends AppCompatActivity
       if (recognition1 != null) {
         if (recognition1.getTitle() != null) {
           recognition1TextView.setText(recognition1.getTitle());
-          if (recognition1.getTitle().toLowerCase(Locale.getDefault()).equals(PUPUSAS_TITLE) && recognition1.getConfidence() >= PUPUSAS_THREASHOLD) {
+          if (recognition1.getTitle().toLowerCase(Locale.getDefault()).equals(PUPUSAS_TITLE) && recognition1.getConfidence() >= PUPUSAS_THRESHOLD) {
             isPupusas = true;
           }
         }
