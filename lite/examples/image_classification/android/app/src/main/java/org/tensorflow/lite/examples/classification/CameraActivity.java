@@ -34,7 +34,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Trace;
-import androidx.appcompat.app.AppCompatActivity;
 import android.util.Size;
 import android.view.Surface;
 import android.view.View;
@@ -46,22 +45,31 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.annotation.NonNull;
-import androidx.annotation.UiThread;
+
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import java.nio.ByteBuffer;
-import java.util.List;
+
 import org.tensorflow.lite.examples.classification.env.ImageUtils;
 import org.tensorflow.lite.examples.classification.env.Logger;
 import org.tensorflow.lite.examples.classification.tflite.Classifier.Device;
 import org.tensorflow.lite.examples.classification.tflite.Classifier.Model;
 import org.tensorflow.lite.examples.classification.tflite.Classifier.Recognition;
 
+import java.nio.ByteBuffer;
+import java.util.List;
+import java.util.Locale;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.UiThread;
+import androidx.appcompat.app.AppCompatActivity;
+
 public abstract class CameraActivity extends AppCompatActivity
     implements OnImageAvailableListener,
         Camera.PreviewCallback,
         View.OnClickListener,
         AdapterView.OnItemSelectedListener {
+  private static final String PUPUSAS_TITLE = "pupusas";
+  private static final double PUPUSAS_THRESHOLD = 0.75;
+
   private static final Logger LOGGER = new Logger();
 
   private static final int PERMISSIONS_REQUEST = 1;
@@ -86,7 +94,9 @@ public abstract class CameraActivity extends AppCompatActivity
       recognition2TextView,
       recognitionValueTextView,
       recognition1ValueTextView,
-      recognition2ValueTextView;
+      recognition2ValueTextView,
+      isHotDogTextView,
+      notHotDogTextView;
   protected TextView frameValueTextView,
       cropValueTextView,
       cameraResolutionTextView,
@@ -179,6 +189,8 @@ public abstract class CameraActivity extends AppCompatActivity
     recognition1ValueTextView = findViewById(R.id.detected_item1_value);
     recognition2TextView = findViewById(R.id.detected_item2);
     recognition2ValueTextView = findViewById(R.id.detected_item2_value);
+    isHotDogTextView = findViewById(R.id.tv_is_a_hot_dog);
+    notHotDogTextView = findViewById(R.id.tv_not_a_hot_dog);
 
     frameValueTextView = findViewById(R.id.frame_info);
     cropValueTextView = findViewById(R.id.crop_info);
@@ -522,10 +534,17 @@ public abstract class CameraActivity extends AppCompatActivity
 
   @UiThread
   protected void showResultsInBottomSheet(List<Recognition> results) {
-    if (results != null && results.size() >= 3) {
+    if (results != null && results.size() >= 2) {
+      boolean isPupusas = false;
       Recognition recognition = results.get(0);
+
       if (recognition != null) {
-        if (recognition.getTitle() != null) recognitionTextView.setText(recognition.getTitle());
+        if (recognition.getTitle() != null) {
+          recognitionTextView.setText(recognition.getTitle());
+          if (recognition.getTitle().toLowerCase(Locale.getDefault()).equals(PUPUSAS_TITLE) && recognition.getConfidence() >= PUPUSAS_THRESHOLD) {
+            isPupusas = true;
+          }
+        }
         if (recognition.getConfidence() != null)
           recognitionValueTextView.setText(
               String.format("%.2f", (100 * recognition.getConfidence())) + "%");
@@ -533,18 +552,23 @@ public abstract class CameraActivity extends AppCompatActivity
 
       Recognition recognition1 = results.get(1);
       if (recognition1 != null) {
-        if (recognition1.getTitle() != null) recognition1TextView.setText(recognition1.getTitle());
+        if (recognition1.getTitle() != null) {
+          recognition1TextView.setText(recognition1.getTitle());
+          if (recognition1.getTitle().toLowerCase(Locale.getDefault()).equals(PUPUSAS_TITLE) && recognition1.getConfidence() >= PUPUSAS_THRESHOLD) {
+            isPupusas = true;
+          }
+        }
         if (recognition1.getConfidence() != null)
           recognition1ValueTextView.setText(
               String.format("%.2f", (100 * recognition1.getConfidence())) + "%");
       }
 
-      Recognition recognition2 = results.get(2);
-      if (recognition2 != null) {
-        if (recognition2.getTitle() != null) recognition2TextView.setText(recognition2.getTitle());
-        if (recognition2.getConfidence() != null)
-          recognition2ValueTextView.setText(
-              String.format("%.2f", (100 * recognition2.getConfidence())) + "%");
+      if (isPupusas) {
+        isHotDogTextView.setVisibility(View.VISIBLE);
+        notHotDogTextView.setVisibility(View.GONE);
+      } else {
+        isHotDogTextView.setVisibility(View.GONE);
+        notHotDogTextView.setVisibility(View.VISIBLE);
       }
     }
   }

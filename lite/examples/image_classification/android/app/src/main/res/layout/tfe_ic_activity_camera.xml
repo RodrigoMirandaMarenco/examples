@@ -42,10 +42,34 @@
             android:layout_alignParentTop="true"
             android:background="@color/tfe_semi_transparent">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/tfl2_logo" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_is_a_hot_dog"
+                    android:text="@string/pupusas"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="#FFFF22"
+                    android:background="#00FF00"
+                    android:visibility="gone"
+                    android:textSize="36sp" />
+
+                <TextView
+                    android:visibility="gone"
+                    android:id="@+id/tv_not_a_hot_dog"
+                    android:text="@string/not_pupusas"
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textColor="#FFFF22"
+                    android:background="#FF0000"
+                    android:textSize="36sp" />
+
+            </RelativeLayout>
+
         </androidx.appcompat.widget.Toolbar>
 
     </RelativeLayout>

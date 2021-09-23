@@ -16,9 +16,11 @@ limitations under the License.
 package org.tensorflow.lite.examples.classification.tflite;
 
 import android.app.Activity;
-import java.io.IOException;
+
 import org.tensorflow.lite.support.common.TensorOperator;
 import org.tensorflow.lite.support.common.ops.NormalizeOp;
+
+import java.io.IOException;
 
 /** This TensorFlow Lite classifier works with the quantized EfficientNet model. */
 public class ClassifierQuantizedEfficientNet extends Classifier {
@@ -51,12 +53,12 @@ public class ClassifierQuantizedEfficientNet extends Classifier {
     // you can download this file from
     // see build.gradle for where to obtain this file. It should be auto
     // downloaded into assets.
-    return "efficientnet-lite0-int8.tflite";
+    return "model_single_pupusas.tflite";
   }
 
   @Override
   protected String getLabelPath() {
-    return "labels_without_background.txt";
+    return "labels_single_pupusas_no_bg.txt";
   }
 
   @Override

@@ -16,10 +16,11 @@ limitations under the License.
 package org.tensorflow.lite.examples.classification.tflite;
 
 import android.app.Activity;
-import java.io.IOException;
-import org.tensorflow.lite.examples.classification.tflite.Classifier.Device;
+
 import org.tensorflow.lite.support.common.TensorOperator;
 import org.tensorflow.lite.support.common.ops.NormalizeOp;
+
+import java.io.IOException;
 
 /** This TensorFlowLite classifier works with the float MobileNet model. */
 public class ClassifierFloatMobileNet extends Classifier {
@@ -52,12 +53,12 @@ public class ClassifierFloatMobileNet extends Classifier {
     // you can download this file from
     // see build.gradle for where to obtain this file. It should be auto
     // downloaded into assets.
-    return "mobilenet_v1_1.0_224.tflite";
+    return "model_single_pupusas.tflite";
   }
 
   @Override
   protected String getLabelPath() {
-    return "labels.txt";
+    return "labels_single_pupusas.txt";
   }
 
   @Override
