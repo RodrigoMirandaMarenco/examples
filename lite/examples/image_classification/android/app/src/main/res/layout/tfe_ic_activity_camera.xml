@@ -48,7 +48,7 @@
 
                 <TextView
                     android:id="@+id/tv_is_a_hot_dog"
-                    android:text="Hotdog!"
+                    android:text="@string/pupusas"
                     android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -60,7 +60,7 @@
                 <TextView
                     android:visibility="gone"
                     android:id="@+id/tv_not_a_hot_dog"
-                    android:text="Not hotdog!"
+                    android:text="@string/not_pupusas"
                     android:gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
